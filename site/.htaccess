@@ -1,0 +1,5 @@
+# Preview build: keep the whole site out of search engines (belt and braces with
+# the robots meta tag on every page and robots.txt). Remove only at launch, on Roger's go.
+<IfModule mod_headers.c>
+  Header set X-Robots-Tag "noindex, nofollow"
+</IfModule>
