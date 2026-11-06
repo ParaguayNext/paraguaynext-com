@@ -19,11 +19,22 @@ NAV = [("guides.html","Guides"),("community.html","Community"),("events.html","E
 SOCIAL = ["X","Instagram","TikTok","Snapchat","Telegram","WhatsApp"]
 
 GUIDES = [  # working titles from /workspace/pm/paraguaynext-plan.md section 2
-  ("Moving to Paraguay: the step-by-step plan", ["plan"], False),
-  ("Your first 30 days in Paraguay", ["arr"], False),
-  ("Cost of living in Paraguay", ["plan","arr"], False),
-  ("Tax and residency basics (general information)", ["plan","money"], True),
-  ("Making money and starting a business in Paraguay", ["money"], False),
+  # (title, tags, disclaimer, image_slug, alt)
+  ("Moving to Paraguay: the step-by-step plan", ["plan"], False,
+   "guide-01-moving-to-paraguay-web-800x412",
+   "Illustrated cover for Moving to Paraguay: packing crates and a map of Paraguay"),
+  ("Your first 30 days in Paraguay", ["arr"], False,
+   "guide-02-first-30-days-web-800x412",
+   "Illustrated cover for Your first 30 days: calendar and everyday Paraguay errands"),
+  ("Cost of living in Paraguay", ["plan","arr"], False,
+   "guide-03-cost-of-living-web-800x412",
+   "Illustrated cover for Cost of living: market produce and everyday expenses"),
+  ("Tax and residency basics (general information)", ["plan","money"], True,
+   "guide-04-tax-and-residency-basics-web-800x412",
+   "Illustrated cover for Tax and residency basics: documents and a residence stamp"),
+  ("Making money and starting a business in Paraguay", ["money"], False,
+   "guide-05-making-money-web-800x412",
+   "Illustrated cover for Making money: laptop workspace and local business motifs"),
 ]
 TAGNAME = {"plan":"Planning to move","arr":"Just arrived","money":"Money and business"}
 
@@ -47,17 +58,22 @@ def email_box(title="Get the free guides by email"):
 </div>'''
 
 def guide_card(i, g):
-    title, tags, dis = g
+    title, tags, dis, img_slug, alt = g
     t = "".join(f'<span class="tag">{TAGNAME[x]}</span>' for x in tags)
     cls = " ".join(f"t-{x}" for x in tags)
+    # Guide cards sit below the fold on home and guides; lazy-load.
     return f'''<article class="card {cls}">
-  <div class="ph-img">[IMAGE] Guide cover {i} (Skool course cover style)</div>
+  <picture class="card-media">
+    <source type="image/webp" srcset="assets/images/guide-cards/{img_slug}.webp">
+    <img src="assets/images/guide-cards/{img_slug}.jpg" alt="{html.escape(alt)}" width="800" height="412" loading="lazy" decoding="async">
+  </picture>
   <div class="tags">{t}</div>
   <h3>{html.escape(title)}</h3>
   <p class="microcopy">Working title from plan</p>
   <p>{ph("One-line summary of the guide.")}</p>
   <a class="more" href="guide-template.html">Read the guide →</a>
 </article>'''
+
 
 def cta_block():
     return f'''<section class="cta-block section" aria-label="Join the community">
@@ -143,7 +159,10 @@ home = f'''<section class="hero"><div class="wrap">
     <p class="lead">{ph("Supporting sentence: information hub and free community for expats in Paraguay.")}</p>
     <div class="cta-row">{cta()}<span class="microcopy">{ph("Microcopy, e.g. what happens after you click.")}</span></div>
   </div>
-  <div class="ph-img" style="min-height:360px">[IMAGE] Hero image — Paraguay scene (source/licence TBD)</div>
+  <picture class="hero-media">
+    <source type="image/webp" srcset="assets/images/hero/B-red-earth-lapacho-road-1280x360.webp">
+    <img src="assets/images/hero/B-red-earth-lapacho-road-1280x360.jpg" alt="Illustrative scene of a red-earth road under pink lapacho trees in Paraguay" width="1280" height="360" decoding="async">
+  </picture>
 </div></section>
 <section class="section band-yerba"><div class="wrap">
   <span class="eyebrow">Inside the free community</span>
