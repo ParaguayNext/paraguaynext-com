@@ -70,8 +70,8 @@ GUIDES = [
      "href": "guide-template.html", "label": "Read the guide"},
 ]
 TAGNAME = {"plan": "Planning to move", "arr": "Just arrived", "money": "Money and business"}
-# Community page still lists the eight Skool sections. Home omits Meetups.
-SECTIONS = ["Move planning", "New arrivals", "Meetups", "Events", "Tech", "Business ideas", "Making money", "Tax and investments"]
+# Home and the community page omit Meetups. The home intro still says "Eight sections".
+SECTIONS = ["Move planning", "New arrivals", "Events", "Tech", "Business ideas", "Making money", "Tax and investments"]
 SYMBOL = "assets/brand/symbol/lapacho-symbol-lapacho.svg"
 
 def social():
